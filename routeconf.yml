@@ -1,0 +1,23 @@
+---
+Cisco-IOS-XE-native:route:
+  ip-route-interface-forwarding-list:
+  - prefix: 33.33.33.0
+    mask: 255.255.255.0
+    fwd-list:
+    - fwd: GigabitEthernet2
+  - prefix: 44.44.44.0
+    mask: 255.255.255.0
+    fwd-list:
+    - fwd: GigabitEthernet3
+  - prefix: 11.11.11.0
+    mask: 255.255.255.0
+    fwd-list:
+    - fwd: GigabitEthernet2
+      interface-next-hop:
+      - ip-address: 10.1.1.1
+  - prefix: 12.12.12.0
+    mask: 255.255.255.0
+    fwd-list:
+    - fwd: GigabitEthernet3
+      interface-next-hop:
+      - ip-address: 10.3.3.3
