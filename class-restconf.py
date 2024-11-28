@@ -30,6 +30,7 @@ class RestConfInterfaceManager:
         """Retrieve the IP address of the interface."""
         try:
             url = f"{self.base_url}GigabitEthernet={self.intfno}/ip/address"
+            print(f"[yellow]GET Request URL: {url}[/yellow]")  # For debugging
             response = requests.get(url=url, auth=self.auth, headers=self.headers, verify=False)
             #Raise an HTTPError for bad responses
             response.raise_for_status()
@@ -48,8 +49,9 @@ class RestConfInterfaceManager:
         try:
             url = f"{self.base_url}GigabitEthernet={self.intfno}/ip/address/primary/address"
             payload = {"address": address, "mask": mask}
+            print(f"[yellow]PUT Request URL: {url}[/yellow]")  # For debugging
             response = requests.put(url=url, auth=self.auth, headers=self.headers, verify=False, data=json.dumps(payload))
-            # Raise an HTTPError for bad responses
+            # Raise an HTTPError for bad responses (e.g., 400, 500)
             response.raise_for_status()
             print("\n[green]Response Status Code:[/green]", response.status_code)
         except requests.exceptions.RequestException as e:
@@ -61,6 +63,7 @@ class RestConfInterfaceManager:
         """Retrieve the IP address of the interface after update."""
         try:
             url = f"{self.base_url}GigabitEthernet={self.intfno}/ip/address"
+            print(f"[yellow]GET Request URL: {url}[/yellow]")  # For debugging
             response = requests.get(url=url, auth=self.auth, headers=self.headers, verify=False)
             response.raise_for_status()  # Raise an HTTPError for bad responses
             print("\n[red]PRINT THE UPDATED IP ADDRESS:[/red]")
@@ -94,7 +97,7 @@ if __name__ == "__main__":
     if function_name == "get_ip_address":
         manager.get_ip_address()
     elif function_name == "update_ip_address":
-        manager.update_ip_address(address="192.168.100.1", mask="255.255.255.0")
+        manager.update_ip_address(address="192.168.110.1", mask="255.255.255.0")
     elif function_name == "get_updated_ip_address":
         manager.get_updated_ip_address()
     else:
