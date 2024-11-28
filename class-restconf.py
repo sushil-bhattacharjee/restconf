@@ -3,21 +3,30 @@ import urllib3
 import json
 import sys
 from rich import print
+import os
 
 # Disable warnings for unverified HTTPS requests
 urllib3.disable_warnings()
 
 class RestConfInterfaceManager:
-    def __init__(self, base_url, intfno, username, password):
+    def __init__(self, base_url, intfno):
         self.base_url = base_url
         self.intfno = intfno
-        self.auth = (username, password)
+        
+        #Get username and password from environment variables
+        self.username = os.getenv('RESTCONF_USERNAME')
+        self.password = os.getenv('RESTCONF_PASSWORD')
+        if not self.username or not self.password:
+            print("[red]Error: Username or password not set in environment variables![/red]")
+            exit(1)
+
+        self.auth = (self.username, self.password)
         self.headers = {
             'Content-Type': 'application/yang-data+json',
             'Accept': 'application/yang-data+json'
         }
-
-    def get_ip_address(self):
+            
+    def get_ip_address():
         """Retrieve the IP address of the interface."""
         url = f"{self.base_url}GigabitEthernet={self.intfno}/ip/address"
         response = requests.get(url=url, auth=self.auth, headers=self.headers, verify=False)
@@ -51,8 +60,6 @@ if __name__ == "__main__":
     manager = RestConfInterfaceManager(
         base_url='https://192.168.0.59:443/restconf/data/native/interface/',
         intfno= 3,
-        username='admin',
-        password='C1sco12345'
     )
 
     # Get the command-line argument (function name)
@@ -71,7 +78,7 @@ if __name__ == "__main__":
     if function_name == "get_ip_address":
         manager.get_ip_address()
     elif function_name == "update_ip_address":
-        manager.update_ip_address(address="192.168.150.1", mask="255.255.255.0")
+        manager.update_ip_address(address="192.168.90.1", mask="255.255.255.0")
     elif function_name == "get_updated_ip_address":
         manager.get_updated_ip_address()
     else:
