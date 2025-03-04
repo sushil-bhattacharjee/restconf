@@ -1,0 +1,300 @@
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq
+{
+  "Cisco-IOS-XE-native:access-list": {
+    "Cisco-IOS-XE-acl:extended": [
+      {
+        "name": "James_Bond",
+        "access-list-seq-rule": [
+          {
+            "sequence": "110",
+            "ace-rule": {
+              "action": "permit",
+              "protocol": "tcp",
+              "host": "200.0.0.1",
+              "dst-host": "213.0.0.1",
+              "dst-eq": 2743
+            }
+          },
+          {
+            "sequence": "120",
+            "ace-rule": {
+              "action": "permit",
+              "protocol": "tcp",
+              "host": "192.168.0.1",
+              "src-eq": 1024,
+              "dst-host": "10.0.0.1",
+              "dst-eq": 1443
+            }
+          }
+        ]
+      },
+      {
+        "name": "Prod10_Chpater06",
+        "access-list-seq-rule": [
+          {
+            "sequence": "100",
+            "ace-rule": {
+              "action": "permit",
+              "protocol": "tcp",
+              "host": "198.51.100.1",
+              "dst-host": "203.0.113.2",
+              "dst-eq": 1433
+            }
+          }
+        ]
+      },
+      {
+        "name": 100,
+        "access-list-seq-rule": [
+          {
+            "sequence": "10",
+            "ace-rule": {
+              "action": "permit",
+              "protocol": "tcp",
+              "host": "198.51.101.1",
+              "dst-host": "203.1.1.2",
+              "dst-eq": 1933
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
+
+#########
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"'
+[
+  {
+    "name": "James_Bond",
+    "access-list-seq-rule": [
+      {
+        "sequence": "110",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "200.0.0.1",
+          "dst-host": "213.0.0.1",
+          "dst-eq": 2743
+        }
+      },
+      {
+        "sequence": "120",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "192.168.0.1",
+          "src-eq": 1024,
+          "dst-host": "10.0.0.1",
+          "dst-eq": 1443
+        }
+      }
+    ]
+  },
+  {
+    "name": "Prod10_Chpater06",
+    "access-list-seq-rule": [
+      {
+        "sequence": "100",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "198.51.100.1",
+          "dst-host": "203.0.113.2",
+          "dst-eq": 1433
+        }
+      }
+    ]
+  },
+  {
+    "name": 100,
+    "access-list-seq-rule": [
+      {
+        "sequence": "10",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "198.51.101.1",
+          "dst-host": "203.1.1.2",
+          "dst-eq": 1933
+        }
+      }
+    ]
+  }
+]
+##############
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]'
+{
+  "name": "James_Bond",
+  "access-list-seq-rule": [
+    {
+      "sequence": "110",
+      "ace-rule": {
+        "action": "permit",
+        "protocol": "tcp",
+        "host": "200.0.0.1",
+        "dst-host": "213.0.0.1",
+        "dst-eq": 2743
+      }
+    },
+    {
+      "sequence": "120",
+      "ace-rule": {
+        "action": "permit",
+        "protocol": "tcp",
+        "host": "192.168.0.1",
+        "src-eq": 1024,
+        "dst-host": "10.0.0.1",
+        "dst-eq": 1443
+      }
+    }
+  ]
+}
+#######
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"'
+[
+  {
+    "name": "James_Bond",
+    "access-list-seq-rule": [
+      {
+        "sequence": "110",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "200.0.0.1",
+          "dst-host": "213.0.0.1",
+          "dst-eq": 2743
+        }
+      },
+      {
+        "sequence": "120",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "192.168.0.1",
+          "src-eq": 1024,
+          "dst-host": "10.0.0.1",
+          "dst-eq": 1443
+        }
+      }
+    ]
+  },
+  {
+    "name": "Prod10_Chpater06",
+    "access-list-seq-rule": [
+      {
+        "sequence": "100",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "198.51.100.1",
+          "dst-host": "203.0.113.2",
+          "dst-eq": 1433
+        }
+      }
+    ]
+  },
+  {
+    "name": 100,
+    "access-list-seq-rule": [
+      {
+        "sequence": "10",
+        "ace-rule": {
+          "action": "permit",
+          "protocol": "tcp",
+          "host": "198.51.101.1",
+          "dst-host": "203.1.1.2",
+          "dst-eq": 1933
+        }
+      }
+    ]
+  }
+]
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]'
+{
+  "name": "James_Bond",
+  "access-list-seq-rule": [
+    {
+      "sequence": "110",
+      "ace-rule": {
+        "action": "permit",
+        "protocol": "tcp",
+        "host": "200.0.0.1",
+        "dst-host": "213.0.0.1",
+        "dst-eq": 2743
+      }
+    },
+    {
+      "sequence": "120",
+      "ace-rule": {
+        "action": "permit",
+        "protocol": "tcp",
+        "host": "192.168.0.1",
+        "src-eq": 1024,
+        "dst-host": "10.0.0.1",
+        "dst-eq": 1443
+      }
+    }
+  ]
+}
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."name=James_Bond"'
+null
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"'
+[
+  {
+    "sequence": "110",
+    "ace-rule": {
+      "action": "permit",
+      "protocol": "tcp",
+      "host": "200.0.0.1",
+      "dst-host": "213.0.0.1",
+      "dst-eq": 2743
+    }
+  },
+  {
+    "sequence": "120",
+    "ace-rule": {
+      "action": "permit",
+      "protocol": "tcp",
+      "host": "192.168.0.1",
+      "src-eq": 1024,
+      "dst-host": "10.0.0.1",
+      "dst-eq": 1443
+    }
+  }
+]
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]'
+{
+  "sequence": "120",
+  "ace-rule": {
+    "action": "permit",
+    "protocol": "tcp",
+    "host": "192.168.0.1",
+    "src-eq": 1024,
+    "dst-host": "10.0.0.1",
+    "dst-eq": 1443
+  }
+}
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]."dst-host"'
+null
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]."ace-rule"'
+{
+  "action": "permit",
+  "protocol": "tcp",
+  "host": "192.168.0.1",
+  "src-eq": 1024,
+  "dst-host": "10.0.0.1",
+  "dst-eq": 1443
+}
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]."ace-rule"."dst-host"'
+"10.0.0.1"
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]."ace-rule"."dst-host"' -r
+10.0.0.1
+
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]."ace-rule"."dst-host"' -r
+203.0.113.2
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ curl_var=$(curl https://10.1.10.61:443/restconf/data/Cisco-IOS-XE-native:native/ip/access-list -k -u cisco:cisco -H "accept: 
+application/yang-data+json" --silent | jq '."Cisco-IOS-XE-native:access-list"."Cisco-IOS-XE-acl:extended"[0]."access-list-seq-rule"[1]."ace-rule"."dst-host"' -r)
+(.Vrestconf) sushil@Ubuntu24:~/restconf$ echo $curl_var
+203.0.113.2
+(.Vrestconf) 
